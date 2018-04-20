@@ -2,7 +2,6 @@
 class driver(object):
 
     def __init__(self, driver, constructor):
-
         self.driver = driver
         self.constructor = constructor
 
@@ -65,7 +64,6 @@ class constructor(object):
         cost : DataFrame
             Cost history information about the driver
         """
-
         self.quali = quali
         self.race = race
         self.fantasy = fantasy
