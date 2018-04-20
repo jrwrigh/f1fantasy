@@ -1,11 +1,12 @@
 
 class driver(object):
 
-    def __init__(self, driver, constructor):
+    def __init__(self, driver, constructor, driver3):
         self.driver = driver
         self.constructor = constructor
+        self.driver3 = driver3
 
-    def create_profile(self, quali, race, fantasy, cost):
+    def create_profile(self, quali=None, race=None, fantasy=None, cost=None):
         """
         Creation of driver profile data
         
