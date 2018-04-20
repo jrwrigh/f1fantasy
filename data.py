@@ -1,6 +1,4 @@
-
 class driver(object):
-
     def __init__(self, driver, constructor, driver3):
         self.driver = driver
         self.constructor = constructor
@@ -41,11 +39,12 @@ class driver(object):
             Says which season should be updated. Default is "None". If "None" 
             assumes current season.
         """
+
     #This is TBD for now
     pass
 
-class constructor(object):
 
+class constructor(object):
     def __init__(self, constructor, drivers):
         self.constructor = constructor
         self.drivers = drivers
@@ -69,7 +68,3 @@ class constructor(object):
         self.race = race
         self.fantasy = fantasy
         self.cost = cost
-
-
-
-
