@@ -6,7 +6,7 @@ class driver(object):
         self.driver = driver
         self.constructor = constructor
 
-    def create_profile(self, quali, race, fantasy):
+    def create_profile(self, quali, race, fantasy, cost):
         """
         Creation of driver profile data
         
@@ -18,10 +18,13 @@ class driver(object):
             Race Results
         fantasy : DataFrame
             Fantasy scores
+        cost : DataFrame
+            Cost history information about the driver
         """
         self.quali = quali
         self.race = race
         self.fantasy = fantasy
+        self.cost = cost
 
     def update_data(self, type, round=None, year=None):
         """
@@ -38,6 +41,34 @@ class driver(object):
         """
     #This is TBD for now
     pass
+
+class constructor(object):
+
+    def __init__(self, constructor, drivers):
+        self.constructor = constructor
+        self.drivers = drivers
+
+    def create_profile(self, quali, race, fantasy, cost):
+        """
+        Creation of constructor data
+        
+        Parameters
+        ----------
+        quali : DataFrame
+            Qualifying results
+        race : DataFrame
+            Race results
+        fantasy : DataFrame
+            Fantasy Scores
+        cost : DataFrame
+            Cost history information about the driver
+        """
+
+        self.quali = quali
+        self.race = race
+        self.fantasy = fantasy
+        self.cost = cost
+
 
 
 
