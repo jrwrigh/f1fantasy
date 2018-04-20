@@ -21,7 +21,7 @@ class driver(object):
         cost : DataFrame
             Cost history information about the driver
         """
-        self.quali = quali
+        self.quali = qual
         self.race = race
         self.fantasy = fantasy
         self.cost = cost
