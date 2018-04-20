@@ -35,9 +35,11 @@ class driver(object):
         type : string
             Which data set will be updated. Either "quali", "race", or "fantasy"
         round : string or int
-            Says which round of the season it should update. If "None" the next round without data will be filled. Default is "None"
+            Says which round of the season it should update. If "None" the next 
+            round without data will be filled. Default is "None"
         year : int
-            Says which season should be updated. Default is "None". If "None" assumes current season.
+            Says which season should be updated. Default is "None". If "None" 
+            assumes current season.
         """
     #This is TBD for now
     pass
