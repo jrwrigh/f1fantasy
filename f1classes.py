@@ -1,8 +1,9 @@
 class driver(object):
-    def __init__(self, driver, constructor, driver3):
-        self.driver = driver
+
+    def __init__(self, name, constructor, name3):
+        self.name = name
         self.constructor = constructor
-        self.driver3 = driver3
+        self.name3 = name3
 
     def create_profile(self, quali=None, race=None, fantasy=None, cost=None):
         """
@@ -45,6 +46,7 @@ class driver(object):
 
 
 class constructor(object):
+
     def __init__(self, constructor, drivers):
         self.constructor = constructor
         self.drivers = drivers
