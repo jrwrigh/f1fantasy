@@ -9,13 +9,16 @@ def create_drivers(driverdict=None):
         driverdict = {}
 
     raw = pd.read_clipboard()
-    for data in raw.iterrows():
+    for index, data in raw.iterrows():
         splitname = data['Name'].split(' ')
         if len(splitname) <= 2:
-            name3 = splitname[1][0:4]
+            name3 = splitname[1][0:3]
+            name3 = name3.upper()
+        print(index)
 
         driverobj = f1classes.driver(data['Name'], data['Team'], name3)
         driverdict[name3] = driverobj
+    return(driverdict)
 
 
 def data_creation():
@@ -24,4 +27,4 @@ def data_creation():
 
 
 if __name__ == "__main__":
-    create_drivers()
+    driverdict = create_drivers()
