@@ -33,8 +33,13 @@ def add_DriverTable(driverdict):
     driverdict["DriverTable"] = driverdb
 
 
-def create_constructors():
-    pass
+def create_constructors(driverdict):
+    constructordict = {}
+    for _, driver in driverdict['DriverTable'].iterrows():
+        if driver['Team'] not in constructordict.keys():
+            drivers = driverdict['DriverTable'].loc[driverdict['DriverTable'][
+                'Team'] == driver['Team']][['Name', 'Name3']]
+            constructordict[driver['Team']] = f1classes.constructor(driver['Team'])
 
 
 def pickle_drivers(driverdict, file=r'data\drivers.pkl'):
