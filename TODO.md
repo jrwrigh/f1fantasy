@@ -5,3 +5,4 @@ In no particular order, things that need to happen:
 [ ] Make function for extracting pickle data
 [ ] Make evaluation function to determine best driver/constructor combo
 [ ] Make function for pair-wise matrix
+[ ] Check out ergast.com for grabbing grandprix data
