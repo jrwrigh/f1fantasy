@@ -1,3 +1,7 @@
+import namedtupled
+import requests
+
+
 class driver(object):
 
     def __init__(self, name, constructor, name3):
@@ -70,3 +74,21 @@ class constructor(object):
         self.race = race
         self.fantasy = fantasy
         self.cost = cost
+
+class RaceWeekend(object):
+    
+    def __init__(self):
+        pass
+
+    def init_from_ergast(self, season=None, roundn=None):
+        url_base = r'https://ergast.com/api/f1'
+        url_suff_latest = r'/current/last/results'
+        if not season or roundn:
+            url = url_base + url_suff_latest + '.json'
+        rawjson = requests.get(url).json()
+        self.raw = namedtupled.map(rawjson)
+
+        self.season = int(self.raw.MRData.RaceTable.Races[0].season)
+        self.roundn = int(self.raw.MRData.RaceTable.Races[0].round)
+        self.raceName = self.raw.MRData.RaceTable.Races[0].raceName
+        self.date = self.raw.MRData.RaceTable.Races[0].date
