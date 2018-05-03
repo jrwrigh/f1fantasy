@@ -1,7 +1,6 @@
 import pickle
 import pandas as pd
 import f1classes
-import re
 from IPython.core.debugger import set_trace
 
 
@@ -73,7 +72,7 @@ def create_constructors(driverdict):
             constructordict[Team] = f1classes.constructor(Team, drivers)
 
 
-def pickle_drivers(driverdict, file=r'data\drivers.pkl'):
+def pickle_drivers(driverdict, file=r"data\drivers.pkl"):
     """
     Pickles the driversdict
     
@@ -82,14 +81,14 @@ def pickle_drivers(driverdict, file=r'data\drivers.pkl'):
     driverdict : dict
         Dictionary of driver objects
     file : string, optional
-        File path to pickle to (the default is r'data\drivers.pkl')
+        File path to pickle to (the default is r"data\drivers.pkl")
     
     """
 
     pickle.dump(driverdict, open(file, "wb"))
 
 
-def pickle_constructors(constructordict, file=r'data\constructors.pkl'):
+def pickle_constructors(constructordict, file=r"data\constructors.pkl"):
     """
     Pickles the constructorsdict
     
@@ -98,19 +97,19 @@ def pickle_constructors(constructordict, file=r'data\constructors.pkl'):
     constructordict : dict
         Dictionary of constructor objects
     file : string, optional
-        File path to pickle to (the default is r'data\constructors.pkl')
+        File path to pickle to (the default is r"data\constructors.pkl")
     
     """
 
     pickle.dump(constructordict, open(file, "wb"))
 
 
-def load_constructors(file=r'data\constructors.pkl'):
+def load_constructors(file=r"data\constructors.pkl"):
     """
     Loads the constructordict from pickle. Default location is the standard position for the dictionary pickle
     
     file : string, optional
-        Path to pickled file (the default is r'data\constructors.pkl')
+        Path to pickled file (the default is r"data\constructors.pkl")
     
     """
 
@@ -118,12 +117,12 @@ def load_constructors(file=r'data\constructors.pkl'):
     constructordict = pickle.load(open(file, 'rb'))
 
 
-def load_drivers(file=r'data\drivers.pkl'):
+def load_drivers(file=r"data\drivers.pkl"):
     """
     Loads the driverdict from pickle. Default location is the standard position for the dictionary pickle.
     
     file : string, optional
-        Path to pickled file (the default is r'data\drivers.pkl')
+        Path to pickled file (the default is r"data\drivers.pkl")
     
     """
 
