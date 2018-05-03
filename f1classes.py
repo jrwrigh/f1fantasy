@@ -90,17 +90,18 @@ class RaceWeekend(object):
 
     def init_from_ergast(self, season=None, roundn=None):
         url_base = r'https://ergast.com/api/f1'
-        url_suff_latest = r'/current/last/results'
+        url_suffix_latest = r'/current/last/results'
         if not season or roundn:
-            url = url_base + url_suff_latest + '.json'
+            url = url_base + url_suffix_latest + '.json'
         rawjson = requests.get(url).json()
         self.raw = namedtupled.map(rawjson)
+        self.Raceraw = self.raw.MRData.RaceTable.Races[0]
 
-        self.season = int(self.raw.MRData.RaceTable.Races[0].season)
-        self.roundn = int(self.raw.MRData.RaceTable.Races[0].round)
-        self.raceName = self.raw.MRData.RaceTable.Races[0].raceName
+        self.season = int(self.Raceraw.season)
+        self.roundn = int(self.Raceraw.round)
+        self.raceName = self.Raceraw.raceName
         dateraw = re.match(r'(\d{4})-(\d{2})-(\d{2})',
-                           self.raw.MRData.RaceTable.Races[0].date)
+                           self.Raceraw.date)
 
         self.date = datetime.date(
             int(dateraw.group(1)), int(dateraw.group(2)), int(dateraw.group(2)))
@@ -110,7 +111,7 @@ class RaceWeekend(object):
             self.raw != None
         except:
             raise Exception('Raw data has not been imported yet')
-        Results = self.raw.MRData.RaceTable.Races[0].Results
+        Results = self.Raceraw.Results
         ResultsTable = pd.DataFrame(columns=[
             'Position', 'Name', 'Name3', 'Grid', 'Fastest Lap', 'Constructor',
             'Status', 'Change'
