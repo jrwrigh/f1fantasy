@@ -105,6 +105,8 @@ class RaceWeekend(object):
 
         self.date = datetime.date(
             int(dateraw.group(1)), int(dateraw.group(2)), int(dateraw.group(2)))
+        # TODO add qualifying stuff
+        # http://ergast.com/mrd/methods/qualifying/
 
     def parse_raceresults(self):
         try:
