@@ -1,4 +1,7 @@
-import main
+from importlib import reload
+import f1classes
+reload(f1classes)
 
-main.load_drivers()
-main.add_DriverTable(main.driverdict)
+test = f1classes.RaceWeekend()
+test.init_from_ergast()
+test.parse_raceresults()
