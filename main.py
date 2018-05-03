@@ -73,7 +73,7 @@ def create_constructors(driverdict):
             constructordict[Team] = f1classes.constructor(Team, drivers)
 
 
-def pickle_drivers(driverdict, file="data/drivers.dill"):
+def pickle_drivers(driverdict, file='data/drivers.dill'):
     """
     Pickles the driversdict
     
@@ -82,15 +82,15 @@ def pickle_drivers(driverdict, file="data/drivers.dill"):
     driverdict : dict
         Dictionary of driver objects
     file : string, optional
-        File path to pickle to (the default is "data/drivers.dill")
+        File path to pickle to (the default is 'data/drivers.dill')
     
     """
 
     file = pathlib.Path(file)
-    dill.dump(driverdict, open(file, "wb"))
+    dill.dump(driverdict, open(file, 'wb'))
 
 
-def pickle_constructors(constructordict, file="data/constructors.dill"):
+def pickle_constructors(constructordict, file='data/constructors.dill'):
     """
     Pickles the constructorsdict
     
@@ -99,28 +99,40 @@ def pickle_constructors(constructordict, file="data/constructors.dill"):
     constructordict : dict
         Dictionary of constructor objects
     file : string, optional
-        File path to pickle to (the default is "data/constructors.dill")
+        File path to pickle to (the default is 'data/constructors.dill')
     
     """
 
     file = pathlib.Path(file)
-    dill.dump(constructordict, open(file, "wb"))
+    dill.dump(constructordict, open(file, 'wb'))
 
 
 def pickle_RaceWeekend(RaceWeekend, file=None):
+    """
+    Pickles a RaceWeekend object using dill.
+    
+    Parameters
+    ----------
+    RaceWeekend : f1classes.RaceWeekend
+        Data for a Race Weekend
+    file : str, optional
+        File path to pickle to (the default is None, which places the file in 'data/races/' with the file format of '{season}_{roundn}-{country}.dill')
+    
+    """
+
     if file == None:
-        file = pathlib.Path("data/races") / "{0}_{1}-{2}.dill".format(
+        file = pathlib.Path('data/races') / '{0}_{1}-{2}.dill'.format(
             RaceWeekend.season, RaceWeekend.roundn,
             RaceWeekend.Raceraw.Circuit.Location.country)
     dill.dump(RaceWeekend, open(file, 'wb')) 
 
 
-def load_constructors(file="data/constructors.dill"):
+def load_constructors(file='data/constructors.dill'):
     """
     Loads the constructordict from pickle. Default location is the standard position for the dictionary pickle
     
     file : string, optional
-        Path to pickled file (the default is r"data\constructors.dill")
+        Path to pickled file (the default is 'data\constructors.dill')
     
     """
 
@@ -129,12 +141,12 @@ def load_constructors(file="data/constructors.dill"):
     constructordict = dill.load(open(file, 'rb'))
 
 global driverdict
-def load_drivers(file="data/drivers.dill"):
+def load_drivers(file='data/drivers.dill'):
     """
     Loads the driverdict from pickle. Default location is the standard position for the dictionary pickle.
     
     file : string, optional
-        Path to pickled file (the default is r"data\drivers.dill")
+        Path to pickled file (the default is 'data\drivers.dill')
     
     """
 
@@ -143,14 +155,28 @@ def load_drivers(file="data/drivers.dill"):
     driverdict = dill.load(open(file, 'rb'))
 
 def load_RaceWeekend(filepath=None, season=None, roundn=None, country=None):
-    path = pathlib.Path("data/races")
+    """
+    Loads a RaceWeekend object into the namespace using dill
+    
+    filepath : str, optional
+        Path to the pickled file (the default is None)
+    season : int, optional
+        The season of the race (the default is None)
+    roundn : int, optional
+        The round number of the race (the default is None)
+    country : str, optional
+        The country location of the race (the default is None)
+    
+    """
+
+    path = pathlib.Path('data/races')
     if filepath:
         file = pathlib.Path(filepath)
     
     return(dill.load(open(file, 'rb')))
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     # Use the below to create a drivers pickle to store their information
     # driverdict = create_drivers()
     # pickle_drivers(driverdict)
