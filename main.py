@@ -1,7 +1,8 @@
-import pickle
+import dill
 import pandas as pd
 import f1classes
 from IPython.core.debugger import set_trace
+import pathlib 
 
 
 def create_drivers(driverdict=None):
@@ -72,7 +73,7 @@ def create_constructors(driverdict):
             constructordict[Team] = f1classes.constructor(Team, drivers)
 
 
-def pickle_drivers(driverdict, file=r"data\drivers.pkl"):
+def pickle_drivers(driverdict, file="data/drivers.dill"):
     """
     Pickles the driversdict
     
@@ -81,14 +82,15 @@ def pickle_drivers(driverdict, file=r"data\drivers.pkl"):
     driverdict : dict
         Dictionary of driver objects
     file : string, optional
-        File path to pickle to (the default is r"data\drivers.pkl")
+        File path to pickle to (the default is "data/drivers.dill")
     
     """
 
-    pickle.dump(driverdict, open(file, "wb"))
+    file = pathlib.Path(file)
+    dill.dump(driverdict, open(file, "wb"))
 
 
-def pickle_constructors(constructordict, file=r"data\constructors.pkl"):
+def pickle_constructors(constructordict, file="data/constructors.dill"):
     """
     Pickles the constructorsdict
     
@@ -97,37 +99,55 @@ def pickle_constructors(constructordict, file=r"data\constructors.pkl"):
     constructordict : dict
         Dictionary of constructor objects
     file : string, optional
-        File path to pickle to (the default is r"data\constructors.pkl")
+        File path to pickle to (the default is "data/constructors.dill")
     
     """
 
-    pickle.dump(constructordict, open(file, "wb"))
+    file = pathlib.Path(file)
+    dill.dump(constructordict, open(file, "wb"))
 
 
-def load_constructors(file=r"data\constructors.pkl"):
+def pickle_RaceWeekend(RaceWeekend, file=None):
+    if file == None:
+        file = pathlib.Path("data/races") / "{0}_{1}-{2}.dill".format(
+            RaceWeekend.season, RaceWeekend.roundn,
+            RaceWeekend.Raceraw.Circuit.Location.country)
+    dill.dump(RaceWeekend, open(file, 'wb')) 
+
+
+def load_constructors(file="data/constructors.dill"):
     """
     Loads the constructordict from pickle. Default location is the standard position for the dictionary pickle
     
     file : string, optional
-        Path to pickled file (the default is r"data\constructors.pkl")
+        Path to pickled file (the default is r"data\constructors.dill")
     
     """
 
     global constructordict
-    constructordict = pickle.load(open(file, 'rb'))
+    file = pathlib.Path(file)
+    constructordict = dill.load(open(file, 'rb'))
 
-
-def load_drivers(file=r"data\drivers.pkl"):
+global driverdict
+def load_drivers(file="data/drivers.dill"):
     """
     Loads the driverdict from pickle. Default location is the standard position for the dictionary pickle.
     
     file : string, optional
-        Path to pickled file (the default is r"data\drivers.pkl")
+        Path to pickled file (the default is r"data\drivers.dill")
     
     """
 
     global driverdict
-    driverdict = pickle.load(open(file, 'rb'))
+    file = pathlib.Path(file)
+    driverdict = dill.load(open(file, 'rb'))
+
+def load_RaceWeekend(filepath=None, season=None, roundn=None, country=None):
+    path = pathlib.Path("data/races")
+    if filepath:
+        file = pathlib.Path(filepath)
+    
+    return(dill.load(open(file, 'rb')))
 
 
 if __name__ == "__main__":
