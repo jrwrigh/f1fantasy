@@ -4,7 +4,6 @@ import f1classes
 import main
 reload(f1classes)
 reload(main)
-# test
 
 global test, test2
 if sys.argv[0] == 'race':
