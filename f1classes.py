@@ -2,7 +2,6 @@ import namedtupled
 import requests
 import re
 import datetime
-from warnings import warn
 import pandas as pd
 from IPython.core.debugger import set_trace
 
