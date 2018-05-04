@@ -140,7 +140,6 @@ def load_constructors(file='data/constructors.dill'):
     file = pathlib.Path(file)
     constructordict = dill.load(open(file, 'rb'))
 
-global driverdict
 def load_drivers(file='data/drivers.dill'):
     """
     Loads the driverdict from pickle. Default location is the standard position for the dictionary pickle.
