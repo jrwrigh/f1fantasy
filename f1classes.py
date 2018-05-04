@@ -83,21 +83,34 @@ class constructor(object):
 
 class RaceWeekend(object):
 
-    def __init__(self):
+    def __init__(self, season=None, roundn=None, initialize=True):
         self.rawr = None
         self.rawq = None
-        pass
+        if roundn == 'latest' and initialize:
+            self.init_from_ergast()
+            self.parse_raceresults()
+            self.parse_qualiresults()
+        elif season and roundn:
+            self.init_from_ergast(season, roundn)
+            self.parse_raceresults()
+            self.parse_qualiresults()
 
+# Baharain race (round 2) has a not attribute 'FastestLap' with a driver for some reason
     def init_from_ergast(self, season=None, roundn=None):
         url_base = r'https://ergast.com/api/f1'
-        if not season or roundn:
+        if not season or not roundn:
             urlr = url_base + '/current/last/results' + '.json'
+        elif season and roundn:
+            urlr = url_base + '/' + str(season) + '/' + str(roundn) + '/results.json'
         rawjson = requests.get(urlr).json()
         self.rawr = namedtupled.map(rawjson)
         self.Raceraw = self.rawr.MRData.RaceTable.Races[0]
 
-        if not season or roundn:
+        if not season or not roundn:
             urlq = url_base + '/' + self.Raceraw.season + '/' + self.Raceraw.round + '/qualifying.json'
+        elif season and roundn:
+            urlq = url_base + '/' + str(season) + '/' + str(roundn) + '/qualifying.json'
+ 
         rawjson_quali = requests.get(urlq).json()
         self.rawq = namedtupled.map(rawjson_quali)
         self.Qualiraw = self.rawq.MRData.RaceTable.Races[0]
