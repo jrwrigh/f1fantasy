@@ -95,7 +95,7 @@ class RaceWeekend(object):
             self.parse_raceresults()
             self.parse_qualiresults()
 
-# Baharain race (round 2) has a not attribute 'FastestLap' with a driver for some reason
+# Bahrain race (round 2) has a not attribute 'FastestLap' with a driver for some reason
     def init_from_ergast(self, season=None, roundn=None):
         url_base = r'https://ergast.com/api/f1'
         if not season or not roundn:
