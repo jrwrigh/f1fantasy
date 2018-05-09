@@ -120,8 +120,6 @@ class RaceWeekend(object):
         dateraw = re.match(r'(\d{4})-(\d{2})-(\d{2})', self.Raceraw.date)
         self.date = datetime.date(
             int(dateraw.group(1)), int(dateraw.group(2)), int(dateraw.group(2)))
-        # TODO add qualifying stuff
-        # http://ergast.com/mrd/methods/qualifying/
 
     def parse_raceresults(self):
         if self.rawr == None:
@@ -180,3 +178,28 @@ class RaceWeekend(object):
 
             ResultsTable = ResultsTable.append(driver, ignore_index=True)
         self.QualiResultsTable = ResultsTable
+
+    def _score_drivers(self):
+        finishscoring = [25,18,15,12,10,8,6,4,2,1]
+        if not self.fantasyscore:
+            self.fantasyscore = pd.DataFrame(columns=['Name','Name3','RacePnts','QualiPnts','TotalPnts'])
+        for result in self.RaceResultsTable.iterrows():
+            driverscore = 0
+
+            if result['Position'] >= 10:
+                driverscore += finishscoring[result['Position']+1]
+
+            if result['Status'] == 'Finished':
+                driverscore += 1
+
+            if result['Change'] > 5:
+                driverscore += 10
+            else:
+                driverscore += 2 * result['Change']
+            
+            if result['Fastest Lap']: driverscore += 5
+
+            if result['Grid'] <= 10:
+                pass
+
+
